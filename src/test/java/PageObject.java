@@ -6,6 +6,7 @@ public class PageObject {
 
     public PageObject(WebDriver driver){
         this.driver = driver;
+        driver.manage().window().maximize();
         PageFactory.initElements(driver, this);
     }
 }
