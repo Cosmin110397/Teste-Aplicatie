@@ -13,7 +13,7 @@ public class HomePage extends PageObject{
     private WebElement objectNameFail;
 
     @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/a")
-    private WebElement readMoreLearning;
+    private WebElement readMoreSelenium;
 
     @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/h2")
     private WebElement learnSeleniumText;
@@ -26,6 +26,7 @@ public class HomePage extends PageObject{
 
     @FindBy(xpath = "//*[@id=\"instructors\"]/div/div/div[1]/div/div/h3")
     private WebElement screenIconTweet;
+
     @FindBy(xpath = "//*[@id=\"instructors\"]/div/div/div[1]/div/div/a[1]/i")
     private WebElement twitterIcon1stInstructor;
 
@@ -56,29 +57,37 @@ public class HomePage extends PageObject{
     @FindBy(xpath = "/html/body/section[2]/div/div/h3")
     private WebElement textCheckValidEmail;
 
+    @FindBy(xpath = "//*[@id=\"question-one\"]/div/text()")
+    private WebElement firstQuestionText;
+
     public String getText() { return this.textHomePage.getText(); }
 
     public String getTextCheckMail() {return this.textCheckValidEmail.getText(); }
 
-
     public void populateEmailBar() {
         this.objectName.sendKeys(OBJECT_NAME);
     }
+
     public void populateEmailBarFail() {this.objectNameFail.sendKeys(OBJECT_NAME_2);}
 
     public void searchItemUsingButton() {
         this.emailButton.click();
     }
+
     public void enterEnrollmentPage() {Utils.scrollToElement(driver, textSus);
         this.startEnrollment.click();}
-    public void searchReadMoreLearning() {Utils.scrollToElement(driver, learnSeleniumText);
-        this.readMoreLearning.click(); }
+
+    public void searchReadMoreSelenium() {Utils.scrollToElement(driver, learnSeleniumText);
+        this.readMoreSelenium.click(); }
+
     public void searchTwitterInstructor() { Utils.scrollToElement(driver, screenIconTweet);
         twitterIcon1stInstructor.click();}
+
     public void findTextSus() {Utils.scrollToElement(driver, textSus);
         this.emailButton.click();}
 
     public void clickOnSubmit() {this.submitButton.click();}
+
     public void clickOnInstructor() {this.instructorButton.click(); }
 
     public String getInstructorsText() { return this.textInstructor.getText(); }
@@ -88,6 +97,8 @@ public class HomePage extends PageObject{
 
     public void setSendMeUp() { Utils.scrollToElement(driver, this.sendMeUp);
         this.sendMeUp.click();}
+
+        public String verifyIfIAmOnHomePage() {return this.textHomePage.getText();}
 
     public HomePage(WebDriver driver) { super(driver); }
 }

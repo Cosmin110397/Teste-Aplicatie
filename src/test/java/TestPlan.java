@@ -12,42 +12,43 @@ public class TestPlan {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
     }
-    @Test(testName = "1Search email")
+    @Test(testName = "1 Search email")
     public static void searchEmail() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
         webForm.populateEmailBar();
         webForm.searchItemUsingButton();
     }
-    @Test(testName = "2Search read more learning")
-    public static void searchReadMoreLearning() {
+    @Test(testName = "2 Search read more Selenium")
+    public static void searchReadMoreSelenium() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
-        webForm.searchReadMoreLearning();
+        FundamentalsPage webPage = new FundamentalsPage(driver);
+        webForm.searchReadMoreSelenium();
+        Utils.waitForElementToLoad(2);
+        Assert.assertEquals(webPage.getFundamentalsText(), "Fundamentals page");
+        webPage.clickReturnFromFundamentals();
+        Assert.assertEquals(webForm.verifyIfIAmOnHomePage(),"Certified Software Tester");
     }
-    @Test(testName = "3Search twitter 1st instructor")
+    @Test(testName = "3 Search twitter 1st instructor")
     public static void searchTwitter() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
         webForm.searchTwitterInstructor();
     }
-
-    @Test(testName = "4Open first response to question")
+    @Test(testName = "4 Open first response to question")
     public static void setOpenFirstQuestion() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
         webForm.setOpenFirstQuestion();
-
     }
-
-    @Test(testName = "5Arrow to send me up")
+    @Test(testName = "5 Arrow to send me up")
     public static void sendMeUpNow() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
         webForm.setSendMeUp();
     }
-
-    @Test(testName = "6Populate 1stPageData")
+    @Test(testName = "6 Populate Personal Information")
     public static void writeMy1Data() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
@@ -57,11 +58,10 @@ public class TestPlan {
         webForm.populateFirstName();
         webForm.populateLastName();
         webForm.populatePasswordBar();
-        webForm.populatePasswordBar2();
+        webForm.populateConfirmPasswordBar();
         webForm.nextPageQuestions();
     }
-
-   @Test(testName = "7Previous Page")
+   @Test(testName = "7 Previous Page Second Page")
     public static void previousPageNavigate() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
@@ -71,25 +71,23 @@ public class TestPlan {
         webForm.populateFirstName();
         webForm.populateLastName();
         webForm.populatePasswordBar();
-        webForm.populatePasswordBar2();
+        webForm.populateConfirmPasswordBar();
         webForm.nextPageQuestions();
         Utils.waitForElementToLoad(3);
         webForm.goToPreviousPage();
         Utils.waitForElementToLoad(3);
-        Assert.assertEquals(webForm.getAccountInfo(), "Personal information");
+        Assert.assertEquals(webForm.getContactInfo(), "Personal information");
     }
-
-    @Test(testName = "8Press learn after scrolling down")
-    public static void learnAfterScroll() {
+    @Test(testName = "8 Instructors button gets me to instructors")
+    public static void instructorsButton() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
         Utils.waitForElementToLoad(1);
         webForm.clickOnInstructor();
         Assert.assertEquals(webForm.getInstructorsText(), "Our Instructors");
     }
-
-    @Test(testName = "9Card info settings")
-    public static void cardInfoPage() {
+    @Test(testName = "9 Completing all data")
+    public static void completingAllData() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
@@ -99,7 +97,7 @@ public class TestPlan {
         webForm.populateFirstName();
         webForm.populateLastName();
         webForm.populatePasswordBar();
-        webForm.populatePasswordBar2();
+        webForm.populateConfirmPasswordBar();
         webForm.nextPageQuestions();
         Utils.waitForElementToLoad(2);
         webForm.populateMailBar();
@@ -123,10 +121,8 @@ public class TestPlan {
         Utils.waitForElementToLoad(2);
         webForm.scrollingHomePage();
         Assert.assertEquals(homePage.getText(), "Certified Software Tester");
-
     }
-
-    @Test(testName = "10Completare fara PostCode")
+    @Test(testName = "10 Completare fara PostCode")
     public static void completingWithoutPC() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
@@ -137,7 +133,7 @@ public class TestPlan {
         webForm.populateFirstName();
         webForm.populateLastName();
         webForm.populatePasswordBar();
-        webForm.populatePasswordBar2();
+        webForm.populateConfirmPasswordBar();
         webForm.nextPageQuestions();
         Utils.waitForElementToLoad(2);
         webForm.populateMailBar();
@@ -147,29 +143,56 @@ public class TestPlan {
         webForm.clickNextAccountInfo();
         Assert.assertEquals(webForm.getErrorText(), "Postcode required");
     }
-
-    @Test(testName = "11Verificare careu rosu cu email valid")//must fail
-    public static void checkingRedMarginsValid() {
+    @Test(testName = "11 Verificare Newsletter cu email valid")//must fail
+    public static void checkingNewsletterValid() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
         homePage.findTextSus();
         homePage.populateEmailBar();
-        //homePage.populateEmailBarFail();
         homePage.clickOnSubmit();
         Assert.assertEquals(homePage.getTextCheckMail(), "Sign Up For Our Newsletter");
     }
-
-    @Test(testName = "12Verificare careu rosu cu email invalid")//must pass
-    public static void checkingRedMarginsInvalid() {
+    @Test(testName = "12 Verificare Newsletter cu email invalid")//must pass
+    public static void checkingNewsletterInvalid() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
         homePage.findTextSus();
-        //homePage.populateEmailBar();
         homePage.populateEmailBarFail();
         homePage.clickOnSubmit();
         Assert.assertEquals(homePage.getTextCheckMail(), "Sign Up For Our Newsletter");
     }
-
+    @Test(testName = "13 Completing all data without CVC code")
+    public static void completingAllDataWithoutCVC() {
+        driver.get(Utils.BASE_URL);
+        HomePage homePage = new HomePage(driver);
+        AccountPage webForm = new AccountPage(driver);
+        homePage.enterEnrollmentPage();
+        Utils.waitForElementToLoad(2);
+        webForm.populateUserName();
+        webForm.populateFirstName();
+        webForm.populateLastName();
+        webForm.populatePasswordBar();
+        webForm.populateConfirmPasswordBar();
+        webForm.nextPageQuestions();
+        Utils.waitForElementToLoad(2);
+        webForm.populateMailBar();
+        webForm.populatePhone();
+        webForm.populateCountry();
+        webForm.populateCity();
+        webForm.populatePostCode();
+        webForm.clickNextAccountInfo();
+        Utils.waitForElementToLoad(2);
+        webForm.clickNextEnrollmentButton();//spre validare card
+        Utils.waitForElementToLoad(2);
+        webForm.populateNameCard();
+        webForm.populateCardNumber();
+        webForm.clickMonthButton();
+        webForm.clickMarch();
+        webForm.clickYearButton();
+        webForm.click2024Year();
+        webForm.scrollingToNext();
+        Assert.assertEquals(webForm.requireCVCCode(), "CVC required");
+        }
     @AfterSuite
     public static void cleanUp() {
         driver.manage().deleteAllCookies();

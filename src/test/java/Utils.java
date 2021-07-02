@@ -11,13 +11,11 @@ public class Utils {
         try {
             TimeUnit.SECONDS.sleep(timeUnit);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            e.printStackTrace(); }
     }
     public static void scrollToElement(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        waitForElementToLoad(3);
-    }
+        waitForElementToLoad(3); }
 
 
 }
