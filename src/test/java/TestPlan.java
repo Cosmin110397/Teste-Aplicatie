@@ -1,9 +1,12 @@
+import jdk.jshell.execution.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 public class TestPlan {
     private static final WebDriver driver = new ChromeDriver();
@@ -193,6 +196,17 @@ public class TestPlan {
         webForm.scrollingToNext();
         Assert.assertEquals(webForm.requireCVCCode(), "CVC required");
         }
+    @Test(testName = "14 Virtual learn")
+    public static void searchVirtualLearn() {
+        driver.get(Utils.BASE_URL);
+        HomePage webForm = new HomePage(driver);
+        VirtualPage webVirtual = new VirtualPage(driver);
+        webForm.virtualPage();
+        Utils.waitForElementToLoad(2);
+        Assert.assertEquals(webVirtual.getVirtualText(), "Virtual");
+        webVirtual.clickReturnFromVirtual();
+        Assert.assertEquals(webForm.verifyIfIAmOnHomePage(), "Certified Software Tester");
+    }
     @AfterSuite
     public static void cleanUp() {
         driver.manage().deleteAllCookies();

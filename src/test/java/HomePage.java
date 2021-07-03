@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends PageObject{
 
     private final String OBJECT_NAME = "cosmin_popica_97@yahoo.com";
+
     @FindBy(xpath = "/html/body/section[2]/div/div/div/input")
     private WebElement objectName;
 
@@ -60,6 +61,9 @@ public class HomePage extends PageObject{
     @FindBy(xpath = "//*[@id=\"question-one\"]/div/text()")
     private WebElement firstQuestionText;
 
+    @FindBy(xpath = "/html/body/section[3]/div/div/div[1]/div/div/a")
+    private WebElement readMoreVirtual;
+
     public String getText() { return this.textHomePage.getText(); }
 
     public String getTextCheckMail() {return this.textCheckValidEmail.getText(); }
@@ -99,6 +103,9 @@ public class HomePage extends PageObject{
         this.sendMeUp.click();}
 
         public String verifyIfIAmOnHomePage() {return this.textHomePage.getText();}
+
+    public void virtualPage() {Utils.scrollToElement(driver, this.submitButton);
+        this.readMoreVirtual.click();}
 
     public HomePage(WebDriver driver) { super(driver); }
 }
