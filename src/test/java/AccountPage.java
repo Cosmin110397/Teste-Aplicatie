@@ -57,7 +57,7 @@ import org.openqa.selenium.WebDriver;
         private WebElement previousPageToPersonalInformation;
 
         @FindBy(xpath = "/html/body/div/div/section/div/form/div[3]/button[2]")
-        private WebElement nextToCardButton;
+        private WebElement nextToCardPage;
 
         @FindBy(xpath = "//*[@id=\"month\"]")
         private WebElement monthButton;
@@ -101,7 +101,9 @@ import org.openqa.selenium.WebDriver;
 
         public void populateFirstName() {this.firstName.sendKeys(FIRSTNAME);}
 
-        public void click2024Year() {this.yearSelect.click();}
+        public void click2024Year() {
+            this.yearButton.click();
+            this.yearSelect.click();}
 
         public void populatePhone() {this.phoneNr.sendKeys(PHONE);}
 
@@ -125,7 +127,7 @@ import org.openqa.selenium.WebDriver;
 
         public void clickNextAccountInfo() {this.nextToChooseClassesButton.click();}
 
-        public void clickNextEnrollmentButton() {this.nextToCardButton.click();}
+        public void clickNextEnrollmentButton() {this.nextToCardPage.click();}
 
         public String getContactInfo() { return this.contactInfo.getText(); }
 
@@ -135,7 +137,9 @@ import org.openqa.selenium.WebDriver;
 
         public void populateNameCard() { this.nameCardPerson.sendKeys(NAMECARD); }
 
-        public void clickMarch() {this.marchSelect.click();}
+        public void clickMarch() {
+            this.monthButton.click();
+            this.marchSelect.click();}
 
         public void goToPreviousPage() { Utils.scrollToElement(driver, previousPageToPersonalInformation);
             this.previousPageToPersonalInformation.click(); }
@@ -145,12 +149,13 @@ import org.openqa.selenium.WebDriver;
 
         public void clickMonthButton() {this.monthButton.click();}
 
+
         public void scrollingToNext() {Utils.scrollToElement(driver, validateCard);
         this.validateCard.click();}
 
         public void nextPageQuestions() { Utils.scrollToElement(driver, butonFirstNext);
             this.butonFirstNext.click(); }
-
+            
         public AccountPage(WebDriver driver) { super(driver); }
 
     }

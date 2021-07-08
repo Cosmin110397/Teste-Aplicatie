@@ -57,11 +57,13 @@ public class TestPlan {
         HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
         homePage.enterEnrollmentPage();
-        webForm.populateUserName();
-        webForm.populateFirstName();
-        webForm.populateLastName();
-        webForm.populatePasswordBar();
-        webForm.populateConfirmPasswordBar();
+        webForm.firstFormPersonalInformation();
+        //webForm.populateUserName();
+        //webForm.populateFirstName();
+        //webForm.populateLastName();
+        //webForm.populatePasswordBar();
+        //webForm.populateConfirmPasswordBar();
+        Utils.waitForElementToLoad(3);
         webForm.nextPageQuestions();
     }
    @Test(testName = "7 Previous Page Second Page")
@@ -94,6 +96,7 @@ public class TestPlan {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
+
         homePage.enterEnrollmentPage();
         Utils.waitForElementToLoad(2);
         webForm.populateUserName();
@@ -167,9 +170,15 @@ public class TestPlan {
     @Test(testName = "13 Completing all data without CVC code")
     public static void completingAllDataWithoutCVC() {
         driver.get(Utils.BASE_URL);
-        HomePage homePage = new HomePage(driver);
+        //HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
-        homePage.enterEnrollmentPage();
+        PageNavigation naviPage = new PageNavigation(driver);
+        naviPage.navigateToPersonalInformation();
+        naviPage.navigateToContactInformation();
+        naviPage.navigateToSelectionClasses();
+        naviPage.navigateToCardInfo();
+        naviPage.navigateToReturnHomeButton();
+        /*homePage.enterEnrollmentPage();
         Utils.waitForElementToLoad(2);
         webForm.populateUserName();
         webForm.populateFirstName();
@@ -193,7 +202,7 @@ public class TestPlan {
         webForm.clickMarch();
         webForm.clickYearButton();
         webForm.click2024Year();
-        webForm.scrollingToNext();
+        webForm.scrollingToNext();*/
         Assert.assertEquals(webForm.requireCVCCode(), "CVC required");
         }
     @Test(testName = "14 Virtual learn")
