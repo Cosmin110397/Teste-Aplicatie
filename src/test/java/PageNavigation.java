@@ -1,46 +1,62 @@
 import org.openqa.selenium.WebDriver;
 
 public class PageNavigation {
+    private static  WebDriver driver;
+
+    public PageNavigation(WebDriver driver) {
+        this.driver = driver;
+    }
+
     enum NavigationStep {
         StepOne,
-        StepTwo, StepThree, StepFour, StepFive}
-WebDriver driver;
-    public void NavigateToStep(NavigationStep step) {
+        StepTwo,
+        StepThree,
+        StepFour,
+        StepFive
+    }
+
+    public void navigateToStep(NavigationStep step) {
         switch(step){
-            case NavigationStep.StepOne:
+            case StepOne:
                 navigateToPersonalInformation();
                 break;
-            case NavigationStep.StepTwo:
+            case StepTwo:
                 navigateToPersonalInformation();
                 navigateToContactInformation();
                 break;
-            case NavigationStep.StepThree:
+            case StepThree:
+                navigateToPersonalInformation();
                 navigateToContactInformation();
                 navigateToSelectionClasses();
                 break;
-            case NavigationStep.StepFour:
+            case StepFour:
+                navigateToPersonalInformation();
+                navigateToContactInformation();
                 navigateToSelectionClasses();
                 navigateToCardInfo();
                 break;
-            case NavigationStep.StepFive:
+            case StepFive:
+                navigateToPersonalInformation();
+                navigateToContactInformation();
+                navigateToSelectionClasses();
                 navigateToCardInfo();
                 navigateToReturnHomeButton();
                 break;
         }
     }
 
-    public void navigateToPersonalInformation() {
+    private void navigateToPersonalInformation() {
         HomePage form = new HomePage(driver);
         form.enterEnrollmentPage();
-        AccountPage form = new AccountPage(driver);
-        form.populateFirstName();
-        form.populateLastName();
-        form.populateUserName();
-        form.populatePasswordBar();
-        form.populateConfirmPasswordBar();
-        form.nextPageQuestions();
+        AccountPage formular = new AccountPage(driver);
+        formular.populateFirstName();
+        formular.populateLastName();
+        formular.populateUserName();
+        formular.populatePasswordBar();
+        formular.populateConfirmPasswordBar();
+        formular.nextPageQuestions();
     }
-    public void navigateToContactInformation() {
+    private void navigateToContactInformation() {
         AccountPage form = new AccountPage(driver);
         form.populateMailBar();
         form.populatePhone();
@@ -49,11 +65,11 @@ WebDriver driver;
         form.populatePostCode();
         form.clickNextAccountInfo();
     }
-    public void navigateToSelectionClasses() {
+    private void navigateToSelectionClasses() {
         AccountPage form = new AccountPage(driver);
         form.clickNextEnrollmentButton();
     }
-    public void navigateToCardInfo() {
+    private void navigateToCardInfo() {
         AccountPage form = new AccountPage(driver);
         form.populateNameCard();
         form.populateCardNumber();
@@ -62,7 +78,7 @@ WebDriver driver;
         form.clickMarch();
         form.scrollingToNext();
     }
-    public void navigateToReturnHomeButton() {
+    private void navigateToReturnHomeButton() {
         AccountPage form = new AccountPage(driver);
         form.scrollingHomePage();
     }

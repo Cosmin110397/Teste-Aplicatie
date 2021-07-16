@@ -107,10 +107,5 @@ public class HomePage extends PageObject{
     public void virtualPage() {Utils.scrollToElement(driver, this.submitButton);
         this.readMoreVirtual.click();}
 
-        public void navigateToPersonalInformation() {Utils.scrollToElement(driver, textSus);
-            this.startEnrollment.click();}
-
-
-
     public HomePage(WebDriver driver) { super(driver); }
 }

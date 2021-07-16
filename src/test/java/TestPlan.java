@@ -6,8 +6,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
 public class TestPlan {
     private static final WebDriver driver = new ChromeDriver();
 
@@ -54,30 +52,15 @@ public class TestPlan {
     @Test(testName = "6 Populate Personal Information")
     public static void writeMy1Data() {
         driver.get(Utils.BASE_URL);
-        HomePage homePage = new HomePage(driver);
-        AccountPage webForm = new AccountPage(driver);
-        homePage.enterEnrollmentPage();
-        webForm.firstFormPersonalInformation();
-        //webForm.populateUserName();
-        //webForm.populateFirstName();
-        //webForm.populateLastName();
-        //webForm.populatePasswordBar();
-        //webForm.populateConfirmPasswordBar();
-        Utils.waitForElementToLoad(3);
-        webForm.nextPageQuestions();
+        PageNavigation pageNavigation = new PageNavigation(driver);
+        pageNavigation.navigateToStep(PageNavigation.NavigationStep.StepOne);
     }
    @Test(testName = "7 Previous Page Second Page")
     public static void previousPageNavigate() {
         driver.get(Utils.BASE_URL);
-        HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
-        homePage.enterEnrollmentPage();
-        webForm.populateUserName();
-        webForm.populateFirstName();
-        webForm.populateLastName();
-        webForm.populatePasswordBar();
-        webForm.populateConfirmPasswordBar();
-        webForm.nextPageQuestions();
+        PageNavigation pageNavigation = new PageNavigation(driver);
+        pageNavigation.navigateToStep(PageNavigation.NavigationStep.StepOne);
         Utils.waitForElementToLoad(3);
         webForm.goToPreviousPage();
         Utils.waitForElementToLoad(3);
@@ -95,37 +78,8 @@ public class TestPlan {
     public static void completingAllData() {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
-        AccountPage webForm = new AccountPage(driver);
-
-        homePage.enterEnrollmentPage();
-        Utils.waitForElementToLoad(2);
-        webForm.populateUserName();
-        webForm.populateFirstName();
-        webForm.populateLastName();
-        webForm.populatePasswordBar();
-        webForm.populateConfirmPasswordBar();
-        webForm.nextPageQuestions();
-        Utils.waitForElementToLoad(2);
-        webForm.populateMailBar();
-        webForm.populatePhone();
-        webForm.populateCountry();
-        webForm.populateCity();
-        webForm.populatePostCode();
-        webForm.clickNextAccountInfo();
-        Utils.waitForElementToLoad(2);
-        webForm.clickNextEnrollmentButton();//spre validare card
-        Utils.waitForElementToLoad(2);
-        webForm.populateNameCard();
-        webForm.populateCardNumber();
-        webForm.populateCVCCode();
-        webForm.clickMonthButton();
-        webForm.clickMarch();
-        webForm.clickYearButton();
-        webForm.click2024Year();
-        webForm.populateCVCCode();
-        webForm.scrollingToNext();
-        Utils.waitForElementToLoad(2);
-        webForm.scrollingHomePage();
+        PageNavigation pageNavigation = new PageNavigation(driver);
+        pageNavigation.navigateToStep(PageNavigation.NavigationStep.StepFive);
         Assert.assertEquals(homePage.getText(), "Certified Software Tester");
     }
     @Test(testName = "10 Completare fara PostCode")
@@ -133,14 +87,8 @@ public class TestPlan {
         driver.get(Utils.BASE_URL);
         HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
-        homePage.enterEnrollmentPage();
-        Utils.waitForElementToLoad(2);
-        webForm.populateUserName();
-        webForm.populateFirstName();
-        webForm.populateLastName();
-        webForm.populatePasswordBar();
-        webForm.populateConfirmPasswordBar();
-        webForm.nextPageQuestions();
+        PageNavigation pageNavigation = new PageNavigation(driver);
+        pageNavigation.navigateToStep(PageNavigation.NavigationStep.StepOne);
         Utils.waitForElementToLoad(2);
         webForm.populateMailBar();
         webForm.populatePhone();
@@ -170,31 +118,9 @@ public class TestPlan {
     @Test(testName = "13 Completing all data without CVC code")
     public static void completingAllDataWithoutCVC() {
         driver.get(Utils.BASE_URL);
-        //HomePage homePage = new HomePage(driver);
         AccountPage webForm = new AccountPage(driver);
-        PageNavigation naviPage = new PageNavigation(driver);
-        naviPage.navigateToPersonalInformation();
-        naviPage.navigateToContactInformation();
-        naviPage.navigateToSelectionClasses();
-        naviPage.navigateToCardInfo();
-        naviPage.navigateToReturnHomeButton();
-        /*homePage.enterEnrollmentPage();
-        Utils.waitForElementToLoad(2);
-        webForm.populateUserName();
-        webForm.populateFirstName();
-        webForm.populateLastName();
-        webForm.populatePasswordBar();
-        webForm.populateConfirmPasswordBar();
-        webForm.nextPageQuestions();
-        Utils.waitForElementToLoad(2);
-        webForm.populateMailBar();
-        webForm.populatePhone();
-        webForm.populateCountry();
-        webForm.populateCity();
-        webForm.populatePostCode();
-        webForm.clickNextAccountInfo();
-        Utils.waitForElementToLoad(2);
-        webForm.clickNextEnrollmentButton();//spre validare card
+        PageNavigation pageNavigation = new PageNavigation(driver);
+        pageNavigation.navigateToStep(PageNavigation.NavigationStep.StepThree);
         Utils.waitForElementToLoad(2);
         webForm.populateNameCard();
         webForm.populateCardNumber();
@@ -202,7 +128,7 @@ public class TestPlan {
         webForm.clickMarch();
         webForm.clickYearButton();
         webForm.click2024Year();
-        webForm.scrollingToNext();*/
+        webForm.scrollingToNext();
         Assert.assertEquals(webForm.requireCVCCode(), "CVC required");
         }
     @Test(testName = "14 Virtual learn")
