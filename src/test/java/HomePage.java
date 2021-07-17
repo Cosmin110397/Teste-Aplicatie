@@ -19,6 +19,9 @@ public class HomePage extends PageObject{
     @FindBy(xpath = "//*[@id=\"learn-selenium\"]/div/div/div[1]/h2")
     private WebElement learnSeleniumText;
 
+    @FindBy(xpath = "/html/body/section[8]/div/div/div[1]/ul/li[5]")
+    private WebElement adresaStudentCheck;
+
     @FindBy(xpath = "/html/body/section[1]/div/div/div/p")
     private WebElement textSus;
 
@@ -64,6 +67,9 @@ public class HomePage extends PageObject{
     @FindBy(xpath = "/html/body/section[3]/div/div/div[1]/div/div/a")
     private WebElement readMoreVirtual;
 
+    @FindBy(xpath = "/html/body/section[8]/div/div/div[1]/h2")
+    private WebElement contactInfoText;
+
     public String getText() { return this.textHomePage.getText(); }
 
     public String getTextCheckMail() {return this.textCheckValidEmail.getText(); }
@@ -74,9 +80,7 @@ public class HomePage extends PageObject{
 
     public void populateEmailBarFail() {this.objectNameFail.sendKeys(OBJECT_NAME_2);}
 
-    public void searchItemUsingButton() {
-        this.emailButton.click();
-    }
+    public void searchItemUsingButton() { this.emailButton.click(); }
 
     public void enterEnrollmentPage() {Utils.scrollToElement(driver, textSus);
         this.startEnrollment.click();}
@@ -91,6 +95,11 @@ public class HomePage extends PageObject{
         this.emailButton.click();}
 
     public void clickOnSubmit() {this.submitButton.click();}
+
+    public String scrollToContact() {Utils.scrollToElement(driver, contactInfoText);
+        return this.adresaStudentCheck.getText();}
+
+    //public String verifierAddress() {return this.adresaCheck.getText();}
 
     public void clickOnInstructor() {this.instructorButton.click(); }
 

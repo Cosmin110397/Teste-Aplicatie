@@ -48,13 +48,13 @@ public class PageNavigation {
     private void navigateToPersonalInformation() {
         HomePage form = new HomePage(driver);
         form.enterEnrollmentPage();
-        AccountPage formular = new AccountPage(driver);
-        formular.populateFirstName();
-        formular.populateLastName();
-        formular.populateUserName();
-        formular.populatePasswordBar();
-        formular.populateConfirmPasswordBar();
-        formular.nextPageQuestions();
+        AccountPage formulary = new AccountPage(driver);
+        formulary.populateFirstName();
+        formulary.populateLastName();
+        formulary.populateUserName();
+        formulary.populatePasswordBar();
+        formulary.populateConfirmPasswordBar();
+        formulary.nextPageQuestions();
     }
     private void navigateToContactInformation() {
         AccountPage form = new AccountPage(driver);

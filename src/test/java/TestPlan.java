@@ -1,4 +1,3 @@
-import jdk.jshell.execution.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -13,12 +12,12 @@ public class TestPlan {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
     }
-    @Test(testName = "1 Search email")
-    public static void searchEmail() {
+    @Test(testName = "1 Check number phone")
+    public static void checkNumberPhone() {
         driver.get(Utils.BASE_URL);
         HomePage webForm = new HomePage(driver);
-        webForm.populateEmailBar();
-        webForm.searchItemUsingButton();
+        webForm.scrollToContact();
+        Assert.assertEquals(webForm.scrollToContact(),"Student Email: student@test-software-student.com");
     }
     @Test(testName = "2 Search read more Selenium")
     public static void searchReadMoreSelenium() {
